@@ -1,4 +1,4 @@
-package dio.marketplace.registration.infrastructure.repository;
+package dio.marketplace.registration.infrastructure.persistence.repository;
 
 import dio.marketplace.registration.domain.Customer;
 import dio.marketplace.registration.domain.CustomerId;
@@ -35,8 +35,8 @@ public class JpaCustomerRepository implements CustomerRepository {
         return customer;
     }
 
-    private static dio.marketplace.registration.infrastructure.entity.Customer mapper(Customer customer) {
-        var entity = new dio.marketplace.registration.infrastructure.entity.Customer();
+    private static dio.marketplace.registration.infrastructure.persistence.entity.Customer mapper(Customer customer) {
+        var entity = new dio.marketplace.registration.infrastructure.persistence.entity.Customer();
 
         entity.setId(customer.getId().id());
         entity.setFirstName(customer.getName());
@@ -45,7 +45,7 @@ public class JpaCustomerRepository implements CustomerRepository {
         return entity;
     }
 
-    private static Customer mapper(dio.marketplace.registration.infrastructure.entity.Customer entity) {
+    private static Customer mapper(dio.marketplace.registration.infrastructure.persistence.entity.Customer entity) {
         String fullName = Optional.ofNullable(entity.getLastName())
                 .map(lastName -> entity.getFirstName() + " " + lastName)
                 .orElseGet(entity::getFirstName);
